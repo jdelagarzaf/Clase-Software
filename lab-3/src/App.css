@@ -92,6 +92,19 @@
   box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.25);
 }
 
+.form-result {
+  margin-top: 1rem;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.form-result p {
+  margin: 0.4rem 0;
+}
+
 @media (max-width: 640px) {
   .form-card {
     padding: 1.2rem;
@@ -125,5 +138,10 @@
   .form-control:focus {
     border-color: #646cff;
     box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.2);
+  }
+
+  .form-result {
+    border: 1px solid #d8deeb;
+    background: #f8faff;
   }
 }
