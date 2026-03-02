@@ -3,15 +3,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Table,Button,Container,FormGroup,Modal,ModalHeader,ModalBody,ModalFooter} from "reactstrap";
 
 const data = [
-  { id: 1, nombre: "Jorge Carranza", empresa: "Tec" },
-  { id: 2, nombre: "Ramon Velez", empresa: "Banorte" },
-  { id: 3, nombre: "Hugo Sanchez ", empresa: "Real Madrid" },
-  { id: 4, nombre: "Rafael Marquez", empresa: "Barcelona" },
-  { id: 5, nombre: "Carlos Alcaraz", empresa: "Mallorca" },
-  { id: 6, nombre: "N. Djokovic", empresa: "Serbia" },
-  { id: 7, nombre: "Sergio Perez", empresa: "Cadillac"},
-  { id: 8, nombre: "Max Verstapen", empresa: "Oracle Red Bull Racing" },
-  { id: 9, nombre: "Carlos Sainz", empresa: "Williams Racing" },
+  { id: 1, nombre: "Jorge Carranza", empresa: "Tec", edad: 22, pais: "Mexico", contacto: "jorge.carranza@tec.mx"},
+  { id: 2, nombre: "Ramon Velez", empresa: "Banorte", edad: 30, pais: "Mexico", contacto: "ramon.velez@banorte.com"},
+  { id: 3, nombre: "Hugo Sanchez ", empresa: "Real Madrid", edad: 28, pais: "Mexico", contacto: "hugo.sanchez@realmadrid.es"},
+  { id: 4, nombre: "Rafael Marquez", empresa: "Barcelona", edad: 35, pais: "Mexico", contacto: "rafael.marquez@barcelona.es"},
+  { id: 5, nombre: "Carlos Alcaraz", empresa: "Mallorca", edad: 21, pais: "Mexico", contacto: "carlos.alcaraz@mallorca.es"},
+  { id: 6, nombre: "N. Djokovic", empresa: "Serbia", edad: 34, pais: "Serbia", contacto:"n.djokovic@serbia.rs"},
+  { id: 7, nombre: "Sergio Perez", empresa: "Cadillac", edad: 25, pais: "Mexico", contacto: "sergio.perez@cadillac.com"},
+  { id: 8, nombre: "Max Verstapen", empresa: "Oracle Red Bull Racing", edad: 24, pais: "Holanda", contacto: "max.verstapen@oracle-red-bull.com"},
+  { id: 9, nombre: "Carlos Sainz", empresa: "Williams Racing", edad: 26, pais: "España", contacto: "carlos.sainz@williams.com"},
 ];
 
 class AppUsuarios extends React.Component {
@@ -23,6 +23,9 @@ class AppUsuarios extends React.Component {
       id: "",
       nombre: "",
       empresa: "",
+      edad: "",
+      pais: "",
+      contacto: "",
     },
   };
 
@@ -54,6 +57,9 @@ class AppUsuarios extends React.Component {
       if (dato.id === registro.id) {
         arreglo[contador].nombre = dato.nombre;
         arreglo[contador].empresa = dato.empresa;
+        arreglo[contador].edad = dato.edad;
+        arreglo[contador].pais = dato.pais;
+        arreglo[contador].contacto = dato.contacto;
       }
       contador++;
     });
@@ -107,6 +113,9 @@ class AppUsuarios extends React.Component {
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Empresa</th>
+                <th>Edad</th>
+                <th>Pais</th>
+                <th>Contacto</th>
                 <th>Acción</th>
               </tr>
             </thead>
@@ -116,6 +125,9 @@ class AppUsuarios extends React.Component {
                 <td>{dato.id}</td>
                 <td>{dato.nombre}</td>
                 <td>{dato.empresa}</td>
+                <td>{dato.edad}</td>
+                <td>{dato.pais}</td>
+                <td>{dato.contacto}</td>
                 <td>
                   <Button color="primary" onClick={() => this.mostrarModalActualizar(dato)} >Editar</Button>{" "}
                   <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
@@ -144,6 +156,21 @@ class AppUsuarios extends React.Component {
               <input className="form-control" name="empresa" type="text" onChange={this.handleChange}
             />
             </FormGroup>
+            <FormGroup>
+              <label>Edad: </label>
+              <input className="form-control" name="edad" type="text" onChange={this.handleChange}
+            />
+            </FormGroup>
+            <FormGroup>
+              <label>Pais: </label>
+              <input className="form-control" name="pais" type="text" onChange={this.handleChange}
+            />
+            </FormGroup>
+            <FormGroup>
+              <label>Contacto: </label>
+              <input className="form-control" name="contacto" type="text" onChange={this.handleChange}
+            />
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => this.insertar()} >Insertar </Button>
@@ -170,6 +197,21 @@ class AppUsuarios extends React.Component {
               <label>Empresa:</label>
               <input className="form-control" name="empresa" type="text"
               onChange={this.handleChange} value={this.state.form.empresa} />
+            </FormGroup>
+            <FormGroup>
+              <label>Edad:</label>
+              <input className="form-control" name="edad" type="text"
+              onChange={this.handleChange} value={this.state.form.edad} />
+            </FormGroup>
+            <FormGroup>
+              <label>Pais:</label>
+              <input className="form-control" name="pais" type="text"
+              onChange={this.handleChange} value={this.state.form.pais} />
+            </FormGroup>
+            <FormGroup>
+              <label>Contacto:</label>
+              <input className="form-control" name="contacto" type="text"
+              onChange={this.handleChange} value={this.state.form.contacto} />
             </FormGroup>
           </ModalBody>
           <ModalFooter>

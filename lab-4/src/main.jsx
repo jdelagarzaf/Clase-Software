@@ -6,5 +6,5 @@ import AppUsuarios from './Usuarios.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppUsuarios />
-  </StrictMode>,
+  </StrictMode>
 )
