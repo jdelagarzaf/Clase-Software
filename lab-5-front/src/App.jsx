@@ -1,27 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import CountryList from './components/CountryList';
-import './App.css'
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div className="App">
-        <header className="App-header">
-          <h1>Administrador de Países</h1>
-        </header>
-        <main>
-          <CountryList />
-        </main>
-        <footer>
-          <p>CRUD de Países © 2026</p>
-        </footer>
-      </div>
-    </>
-  )
+    <div className="app-shell">
+      <header className="app-header">
+        <p className="eyebrow">Laboratorio 5</p>
+        <h1>Administrador de Paises</h1>
+        <p className="subtitle">
+          Crea, edita y organiza paises en una interfaz clara y moderna.
+        </p>
+      </header>
+
+      <main className="app-main">
+        <CountryList />
+      </main>
+
+      <footer className="app-footer">
+        <p>CRUD de Paises � 2026</p>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
