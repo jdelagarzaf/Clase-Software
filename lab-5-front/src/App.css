@@ -23,7 +23,7 @@
 
 .app-header h1 {
   font-size: clamp(1.8rem, 3.3vw, 3rem);
-  max-width: 16ch;
+  max-width: 18ch;
 }
 
 .subtitle {
@@ -43,7 +43,7 @@
   font-size: 0.92rem;
 }
 
-.country-list {
+.project-list {
   display: grid;
   grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: 1rem;
@@ -95,7 +95,7 @@
   font-weight: 600;
 }
 
-.country-form {
+.project-form {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -113,7 +113,8 @@
   font-weight: 600;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -123,11 +124,18 @@
   transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 
-.form-group input::placeholder {
+.form-group textarea {
+  resize: vertical;
+  min-height: 84px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
   color: color-mix(in srgb, var(--muted) 58%, white);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: color-mix(in srgb, var(--accent) 65%, white);
   box-shadow: 0 0 0 3px rgba(31, 122, 87, 0.18);
@@ -182,14 +190,14 @@ button:not(:disabled):hover {
   font-size: 0.8rem;
 }
 
-.countries {
+.projects {
   display: flex;
   flex-direction: column;
   gap: 0.72rem;
   margin-top: 0.8rem;
 }
 
-.country-item {
+.project-item {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -199,11 +207,11 @@ button:not(:disabled):hover {
   background: color-mix(in srgb, white 92%, var(--bg-wash));
 }
 
-.country-info {
+.project-info {
   flex: 1;
 }
 
-.country-tag {
+.project-tag {
   color: var(--muted);
   font-size: 0.73rem;
   font-weight: 700;
@@ -211,31 +219,36 @@ button:not(:disabled):hover {
   letter-spacing: 0.09em;
 }
 
-.country-info h3 {
+.project-info h3 {
   margin-top: 0.24rem;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.4rem;
   font-size: 1.15rem;
 }
 
-.country-meta {
+.project-description {
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.project-meta {
   display: grid;
   gap: 0.35rem;
 }
 
-.country-meta p {
+.project-meta p {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   color: var(--text);
 }
 
-.country-meta span {
+.project-meta span {
   color: var(--muted);
   font-weight: 600;
-  min-width: 60px;
+  min-width: 88px;
 }
 
-.country-actions {
+.project-actions {
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
@@ -279,7 +292,7 @@ button:not(:disabled):hover {
 }
 
 @media (max-width: 900px) {
-  .country-list {
+  .project-list {
     grid-template-columns: 1fr;
   }
 
@@ -287,11 +300,11 @@ button:not(:disabled):hover {
     position: static;
   }
 
-  .country-item {
+  .project-item {
     flex-direction: column;
   }
 
-  .country-actions {
+  .project-actions {
     flex-direction: row;
     justify-content: flex-start;
   }

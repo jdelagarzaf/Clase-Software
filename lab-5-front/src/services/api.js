@@ -1,53 +1,53 @@
-// src/services/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/countries';
-export const getCountries = async () => {
+const API_URL = 'http://localhost:5000/api/projects';
+
+export const getProjects = async () => {
   try {
     const response = await axios.get(API_URL);
     return response.data;
   } catch (error) {
-    console.error('Error al obtener los países:', error);
+    console.error('Error al obtener los proyectos:', error);
     throw error;
   }
 };
 
-export const getCountry = async (id) => {
+export const getProject = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Error al obtener el país:', error);
+    console.error('Error al obtener el proyecto:', error);
     throw error;
   }
 };
 
-export const createCountry = async (country) => {
+export const createProject = async (project) => {
   try {
-    const response = await axios.post(API_URL, country);
+    const response = await axios.post(API_URL, project);
     return response.data;
   } catch (error) {
-    console.error('Error al crear el país:', error);
+    console.error('Error al crear el proyecto:', error);
     throw error;
   }
 };
 
-export const updateCountry = async (id, country) => {
+export const updateProject = async (id, project) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, country);
+    const response = await axios.put(`${API_URL}/${id}`, project);
     return response.data;
   } catch (error) {
-    console.error('Error al actualizar el país:', error);
+    console.error('Error al actualizar el proyecto:', error);
     throw error;
   }
 };
 
-export const deleteCountry = async (id) => {
-try {
+export const deleteProject = async (id) => {
+  try {
     const response = await axios.delete(`${API_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Error al eliminar el país:', error);
+    console.error('Error al eliminar el proyecto:', error);
     throw error;
   }
 };

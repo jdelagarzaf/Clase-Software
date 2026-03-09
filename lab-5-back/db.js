@@ -2,26 +2,38 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv');
 
 dotenv.config();
-// Configuración de la conexión a la base de datos PostgreSQL
+
 const pool = new Pool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || '123456',
   database: process.env.DB_NAME || 'bdpaises',
   port: process.env.DB_PORT || 5432,
-  max: 10, // máximo número de clientes en el pool
+  max: 10
 });
 
-// Función para verificar la conexión
-async function testConnection() {
+async function initializeDatabase() {
   try {
-    const client = await pool.connect();
-    console.log('Conexión a PostgreSQL establecida con éxito');
-    client.release();
+    await pool.query('SELECT 1');
+    console.log('Conexion a PostgreSQL establecida con exito');
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS project (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        "date" DATE NOT NULL,
+        num_integrantes INTEGER NOT NULL CHECK (num_integrantes >= 1),
+        area VARCHAR(255) NOT NULL
+      )
+    `);
+
+    console.log('Tabla project verificada/lista');
   } catch (error) {
-    console.error('Error al conectar a PostgreSQL:', error);
+    console.error('Error al inicializar PostgreSQL:', error);
   }
 }
 
-testConnection();
+initializeDatabase();
+
 module.exports = pool;
