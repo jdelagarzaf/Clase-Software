@@ -1,9 +1,7 @@
-import { useState } from 'react'
+import CryptoJS from 'crypto-js'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const cifrar = (texto) => {
     var textoCifrado = CryptoJS.AES.encrypt(texto, '12345678').toString();
     return textoCifrado;
