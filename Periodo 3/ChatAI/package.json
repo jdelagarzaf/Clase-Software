@@ -5,8 +5,17 @@
   "description": "Small web chat that answers with Gemini using the existing LOTR RAG embeddings.",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "npm run build && node server.js",
+    "vite": "vite",
+    "server": "node server.js",
+    "build": "vite build",
+    "start": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "vite": "^7.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "lucide-react": "^0.468.0"
   },
   "engines": {
     "node": ">=20"

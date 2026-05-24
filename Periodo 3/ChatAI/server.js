@@ -8,7 +8,7 @@ import { spawn } from "node:child_process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const workspaceDir = path.resolve(__dirname, "..", "..");
-const publicDir = path.join(__dirname, "public");
+const distDir = path.join(__dirname, "dist");
 
 loadEnv(path.join(__dirname, ".env"));
 
@@ -46,6 +46,9 @@ function jsonResponse(res, statusCode, data) {
   const body = JSON.stringify(data);
   res.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
     "Content-Length": Buffer.byteLength(body),
   });
   res.end(body);
@@ -248,9 +251,9 @@ async function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const requestedPath = decodeURIComponent(url.pathname);
   const normalizedPath = requestedPath === "/" ? "/index.html" : requestedPath;
-  const filePath = path.normalize(path.join(publicDir, normalizedPath));
+  let filePath = path.normalize(path.join(distDir, normalizedPath));
 
-  if (!filePath.startsWith(publicDir)) {
+  if (!filePath.startsWith(distDir)) {
     res.writeHead(403);
     res.end("Forbidden");
     return;
@@ -262,12 +265,29 @@ async function serveStatic(req, res) {
     res.writeHead(200, { "Content-Type": MIME_TYPES[extension] || "application/octet-stream" });
     res.end(content);
   } catch {
-    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
-    res.end("Not found");
+    try {
+      filePath = path.join(distDir, "index.html");
+      const content = await readFile(filePath);
+      res.writeHead(200, { "Content-Type": MIME_TYPES[".html"] });
+      res.end(content);
+    } catch {
+      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end("Run npm.cmd run build before npm.cmd start, or use npm.cmd run dev.");
+    }
   }
 }
 
 const server = createServer((req, res) => {
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    });
+    res.end();
+    return;
+  }
+
   if (req.method === "POST" && req.url === "/api/chat") {
     handleChat(req, res);
     return;

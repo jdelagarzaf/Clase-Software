@@ -11,20 +11,26 @@ Small web app that uses the existing RAG artifacts in `Bases de Datos/rag` and a
 GEMINI_API_KEY=your_key_here
 ```
 
-3. Start the app:
+3. Install dependencies:
+
+```powershell
+npm.cmd install
+```
+
+4. Start the app:
 
 ```powershell
 npm.cmd start
 ```
 
-4. Open the URL printed in the terminal. It starts at `http://localhost:3000` and automatically moves to the next free port if `3000` is busy.
+5. Open the URL printed in the terminal. The backend defaults to `http://localhost:3010` and moves to the next free port if needed.
 
 ## How It Works
 
 - `rag_search.py` reads `../../Bases de Datos/rag/output/embedded_chunks.json`.
 - It embeds the user question with the same `BAAI/bge-base-en-v1.5` model used by the RAG.
 - `server.js` sends the top retrieved chunks to Gemini through `generateContent`.
-- The frontend shows the polished answer and the retrieved sources.
+- The React frontend shows the polished answer and the retrieved sources.
 
 ## Configuration
 
