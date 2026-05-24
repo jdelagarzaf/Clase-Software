@@ -1,2 +1,3 @@
 .rag_deps/
 __pycache__/
+.venv/

@@ -1,4 +1,5 @@
 import sys
+import os
 
 import psycopg2
 from sentence_transformers import SentenceTransformer
@@ -7,11 +8,11 @@ QUESTION = " ".join(sys.argv[1:]) or "Where is The Shire?"
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 
 DB_CONFIG = {
-    "dbname": "rag_db",
-    "user": "postgres",
-    "password": "postgres",
-    "host": "127.0.0.1",
-    "port": "5433",
+    "dbname": os.getenv("PGDATABASE", "rag_db"),
+    "user": os.getenv("PGUSER", "postgres"),
+    "password": os.getenv("PGPASSWORD", "postgres"),
+    "host": os.getenv("PGHOST", "127.0.0.1"),
+    "port": os.getenv("PGPORT", "5432"),
 }
 
 

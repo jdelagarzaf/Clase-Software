@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import re
 import shutil
 import sys
@@ -43,11 +44,11 @@ MIN_SPLIT_WORDS = 280
 CHUNK_OVERLAP = 35
 
 DB_CONFIG = {
-    "dbname": "rag_db",
-    "user": "postgres",
-    "password": "postgres",
-    "host": "127.0.0.1",
-    "port": "5433",
+    "dbname": os.getenv("PGDATABASE", "rag_db"),
+    "user": os.getenv("PGUSER", "postgres"),
+    "password": os.getenv("PGPASSWORD", "postgres"),
+    "host": os.getenv("PGHOST", "127.0.0.1"),
+    "port": os.getenv("PGPORT", "5432"),
 }
 
 SECTION_MARKERS = [
